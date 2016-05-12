@@ -38,6 +38,75 @@ public class Coleta
     {
         
     }
+    
+    
+    public static void InsertColeta( ObjectId codAgente, ObjectId codPonto, String data)
+    {             
+         // To connect to mongodb server
+         MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
+			
+         // Now connect to your databases
+         MongoDatabase db = mongoClient.getDatabase("Coleta");
+         System.out.print("Conexao ok");
+            
+            
+            
+         MongoCollection<Document> coll = db.getCollection("Coleta");            
+         
+         coll.insertOne(
+                 
+                 new Document()
+                 .append("codAgente", codAgente)
+                 .append("codPonto", codPonto)
+                 .append("dataColeta", data)
+         
+         );
+         
+         //end of Insert method
+   }
+    
+    
+    public static void UpdateColeta(ObjectId id, ObjectId codAgente, ObjectId codPonto, String data)
+    {          
+         // To connect to mongodb server
+         MongoClient mongoClient = new MongoClient( "localhost" , 27017 );			
+         // Now connect to your databases
+         MongoDatabase db = mongoClient.getDatabase("Coleta");
+         System.out.println("Conexao ok");           
+            
+         BasicDBObject criterio = new BasicDBObject();
+         criterio.put("_id", id);
+         
+         BasicDBObject NovoDocumento = new BasicDBObject();
+         NovoDocumento.put("codAgente", codAgente);
+         NovoDocumento.put("codPonto", codPonto); 
+         NovoDocumento.put("dataRetirada", data);
+         
+         
+         BasicDBObject updateDocumento = new BasicDBObject();
+         updateDocumento.put("$set", NovoDocumento);       
+         
+         MongoCollection<Document> coll = db.getCollection("Coleta");   
+         
+         coll.updateOne(criterio, updateDocumento);            
+         System.out.println("Update executado com sucesso!");   
+            
+    } 
+      
+    
+    public static void DeleteColeta(ObjectId id)
+    {
+         // To connect to mongodb server
+         MongoClient mongoClient = new MongoClient( "localhost" , 27017 );			
+         // Now connect to your databases
+         MongoDatabase db = mongoClient.getDatabase("Coleta");
+         System.out.println("Conexao ok");           
+            
+         MongoCollection<Document> coll = db.getCollection("Coleta");   
+         coll.deleteOne(new Document("_id", id));
+         System.out.println("Delete OK!");
+         
+    }
 
     public ObjectId getCodColeta() {
         return codColeta;

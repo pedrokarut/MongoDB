@@ -39,7 +39,7 @@ public class Material
     }
     
     
-      public static void InsertMaterial( String nome, String tipo, int tempoDecomposicao, String descricao)
+    public static void InsertMaterial( String nome, String tipo, int tempoDecomposicao, String descricao)
     {             
          // To connect to mongodb server
          MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
