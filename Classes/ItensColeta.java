@@ -28,16 +28,80 @@ import org.bson.types.ObjectId;
 public class ItensColeta 
 {
     private ObjectId codItem;
-    private ObjectId codMateial;
+    private ObjectId codMaterial;
     private ObjectId codColeta;
     private int quantidade;
     
     
     
+ public static void InsertItem( ObjectId codMaterial, ObjectId codColeta, int quantidade)
+    {             
+         // To connect to mongodb server
+         MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
+			
+         // Now connect to your databases
+         MongoDatabase db = mongoClient.getDatabase("Coleta");
+         System.out.print("Conexao ok");
+            
+            
+            
+         MongoCollection<Document> coll = db.getCollection("ItensColeta");            
+         
+         coll.insertOne(
+                 
+                 new Document()
+                 .append("codMaterial", codMaterial)
+                 .append("codColeta", codColeta)
+                 .append("quantidade", quantidade)
+         
+         );
+         
+         //end of Insert method
+   }
     
     
-  
+    public static void UpdateItem(ObjectId id, ObjectId codMaterial, ObjectId codColeta, int quantidade)
+    {          
+         // To connect to mongodb server
+         MongoClient mongoClient = new MongoClient( "localhost" , 27017 );			
+         // Now connect to your databases
+         MongoDatabase db = mongoClient.getDatabase("Coleta");
+         System.out.println("Conexao ok");           
+            
+         BasicDBObject criterio = new BasicDBObject();
+         criterio.put("_id", id);
+         
+         BasicDBObject NovoDocumento = new BasicDBObject();
+         NovoDocumento.put("codMaterial", codMaterial);
+         NovoDocumento.put("codColeta", codColeta); 
+         NovoDocumento.put("quantidade", quantidade);
+         
+         
+         BasicDBObject updateDocumento = new BasicDBObject();
+         updateDocumento.put("$set", NovoDocumento);       
+         
+         MongoCollection<Document> coll = db.getCollection("ItensColeta");   
+         
+         coll.updateOne(criterio, updateDocumento);            
+         System.out.println("Update executado com sucesso!");   
+            
+    } 
+      
     
+    public static void DeleteItem(ObjectId id)
+    {
+         // To connect to mongodb server
+         MongoClient mongoClient = new MongoClient( "localhost" , 27017 );			
+         // Now connect to your databases
+         MongoDatabase db = mongoClient.getDatabase("Coleta");
+         System.out.println("Conexao ok");           
+            
+         MongoCollection<Document> coll = db.getCollection("ItensColeta");   
+         coll.deleteOne(new Document("_id", id));
+         System.out.println("Delete OK!");
+         
+    }
+   
     public ItensColeta()
     {
         
@@ -51,12 +115,12 @@ public class ItensColeta
         this.codItem = codItem;
     }
 
-    public ObjectId getCodMateial() {
-        return codMateial;
+    public ObjectId getCodMaterial() {
+        return codMaterial;
     }
 
-    public void setCodMateial(ObjectId codMateial) {
-        this.codMateial = codMateial;
+    public void setCodMaterial(ObjectId codMateial) {
+        this.codMaterial = codMateial;
     }
 
     public ObjectId getCodColeta() {

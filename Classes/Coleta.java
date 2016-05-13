@@ -80,7 +80,7 @@ public class Coleta
          BasicDBObject NovoDocumento = new BasicDBObject();
          NovoDocumento.put("codAgente", codAgente);
          NovoDocumento.put("codPonto", codPonto); 
-         NovoDocumento.put("dataRetirada", data);
+         NovoDocumento.put("dataColeta", data);
          
          
          BasicDBObject updateDocumento = new BasicDBObject();
