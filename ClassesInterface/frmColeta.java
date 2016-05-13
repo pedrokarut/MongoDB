@@ -17,10 +17,13 @@ public class frmColeta extends javax.swing.JFrame {
     frmAgenteAmbiental frmAge;
     frmPontoColeta frmPost;
     Coleta c;
-    public ObjectId codColeta;
+    public static ObjectId codColeta;
   
     public frmColeta() {
         initComponents();
+        LimpaCampos();
+        LimpaJTable();
+        PreencheJTable();
     }
     
     private void LimpaCampos()
@@ -61,13 +64,12 @@ public class frmColeta extends javax.swing.JFrame {
         for(int i=0;i<numDocumentos;i++)
         {
          objects[i][0] = document.getObjectId("_id");
-         objects[i][1] = document.getString("codAgente");
-         objects[i][2] = document.getString("codPonto");
+         objects[i][1] = document.getObjectId("codAgente");
+         objects[i][2] = document.getObjectId("codPonto");
          objects[i][3] = document.getString("dataColeta");
-         objects[i][4] = document.getString("estado");
-         objects[i][5] = document.getString("dataRetirada");
          
-         model.addRow(new Object[]{objects[i][0], objects[i][1], objects[i][2], objects[i][3], objects[i][4], objects[i][5]});
+         
+         model.addRow(new Object[]{objects[i][0], objects[i][1], objects[i][2], objects[i][3]});
 
         }
         
@@ -84,6 +86,8 @@ public class frmColeta extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -103,6 +107,19 @@ public class frmColeta extends javax.swing.JFrame {
         btAdicionarAgente = new javax.swing.JButton();
         btImportarColeta = new javax.swing.JButton();
         btEditar1 = new javax.swing.JButton();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
@@ -160,6 +177,11 @@ public class frmColeta extends javax.swing.JFrame {
 
             }
         ));
+        jTableColeta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableColetaMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTableColeta);
 
         btAdiconarPonto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/circle.png"))); // NOI18N
@@ -211,7 +233,7 @@ public class frmColeta extends javax.swing.JFrame {
                                     .addComponent(txtData)
                                     .addComponent(txtCodPosto, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btAdiconarPonto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel3))
                         .addGap(0, 29, Short.MAX_VALUE))
@@ -223,7 +245,6 @@ public class frmColeta extends javax.swing.JFrame {
                                 .addComponent(btImportarColeta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(txtCodColeta, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -235,7 +256,10 @@ public class frmColeta extends javax.swing.JFrame {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(btAdicionarAgente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addGap(32, 32, 32)
-                                        .addComponent(btEditar1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(btEditar1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(121, 121, 121)
+                                        .addComponent(jLabel2)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel1)))
                         .addContainerGap())))
@@ -246,12 +270,13 @@ public class frmColeta extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btEditar1))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(34, 34, 34)
+                        .addGap(63, 63, 63)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtCodColeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -348,8 +373,23 @@ public class frmColeta extends javax.swing.JFrame {
     }//GEN-LAST:event_btEditar1ActionPerformed
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
-        frmAgenteAmbiental.
+        if(frmAgenteAmbiental.codAgente != null)
+        {
+            txtCodAgente.setText(String.valueOf(frmAgenteAmbiental.codAgente));
+        }
+        if(frmPontoColeta.codPonto != null)
+        {
+            txtCodPosto.setText(String.valueOf(frmPontoColeta.codPonto));
+        }
     }//GEN-LAST:event_formWindowGainedFocus
+
+    private void jTableColetaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableColetaMouseClicked
+        int linha = jTableColeta.getSelectedRow();
+        txtCodColeta.setText(String.valueOf(jTableColeta.getValueAt(linha, 0)));
+        txtCodAgente.setText(String.valueOf(jTableColeta.getValueAt(linha, 1)));
+        txtCodPosto.setText(String.valueOf(jTableColeta.getValueAt(linha, 2)));
+        txtData.setText(String.valueOf(jTableColeta.getValueAt(linha, 3)));
+    }//GEN-LAST:event_jTableColetaMouseClicked
 
    
     public static void main(String args[]) {
@@ -398,7 +438,9 @@ public class frmColeta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTableColeta;
     private javax.swing.JTextField txtCodAgente;
     private javax.swing.JTextField txtCodColeta;

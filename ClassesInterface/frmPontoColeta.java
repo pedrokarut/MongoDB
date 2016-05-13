@@ -14,7 +14,7 @@ import org.bson.types.ObjectId;
 public class frmPontoColeta extends javax.swing.JFrame {
 
     PontoColeta p;
-    public ObjectId codPonto;
+    public static ObjectId codPonto;
     
     public frmPontoColeta() {
         initComponents();
@@ -65,11 +65,13 @@ public class frmPontoColeta extends javax.swing.JFrame {
         {
          
          objects[i][0] = document.getObjectId("_id");
-         objects[i][1] = document.getString("codAgente");
-         objects[i][2] = document.getString("codPonto");
-         objects[i][3] = document.getString("dataColeta");
-                  
-         model.addRow(new Object[]{objects[i][0], objects[i][1], objects[i][2], objects[i][3]});
+         objects[i][1] = document.getString("nome");
+         objects[i][2] = document.getString("endereco");
+         objects[i][3] = document.getString("cidade");
+         objects[i][4] = document.getString("estado");
+         objects[i][5] = document.getString("dataRetirada");
+         
+         model.addRow(new Object[]{objects[i][0], objects[i][1], objects[i][2], objects[i][3], objects[i][4], objects[i][5]});
 
         }
         
@@ -333,7 +335,7 @@ public class frmPontoColeta extends javax.swing.JFrame {
         p.setEstado(txtEstado.getText());
         p.setNome(txtNome.getText());
         p.UpdatePonto(id, p.getNome(), p.getEndereco(), p.getCidade(),p.getEstado(), p.getDataRetirada());
-        JOptionPane.showMessageDialog(null, "Ponto de Coleta cadastrado com sucesso!");
+        JOptionPane.showMessageDialog(null, "Ponto de Coleta editada com sucesso!");
         LimpaCampos();
         LimpaJTable();
         PreencheJTable();
@@ -343,7 +345,7 @@ public class frmPontoColeta extends javax.swing.JFrame {
            p = new PontoColeta();
            ObjectId id =  new ObjectId(txtCodPosto.getText());
            p.DeletePonto(id);
-           JOptionPane.showMessageDialog(null, "Ponto de Coleta cadastrado com sucesso!");
+           JOptionPane.showMessageDialog(null, "Ponto de Coleta deletado com sucesso!");
            LimpaCampos();
            LimpaJTable();
            PreencheJTable();
