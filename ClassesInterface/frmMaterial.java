@@ -15,7 +15,7 @@ import org.bson.types.ObjectId;
 public class frmMaterial extends javax.swing.JFrame {
 
     Material m;
-    public ObjectId codMaterial;
+    public static ObjectId codMaterial;
 
     
     public frmMaterial() {

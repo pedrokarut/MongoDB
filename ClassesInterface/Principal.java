@@ -21,6 +21,7 @@ public class Principal extends javax.swing.JFrame {
         btAgente = new javax.swing.JButton();
         btMaterial = new javax.swing.JButton();
         btColeta = new javax.swing.JButton();
+        btAgente3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,6 +62,15 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        btAgente3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btAgente3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/item64.png"))); // NOI18N
+        btAgente3.setText("Itens de Coleta");
+        btAgente3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAgente3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -75,6 +85,10 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(btPosto, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
                     .addComponent(btMaterial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(19, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btAgente3, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(168, 168, 168))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,7 +101,9 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btAgente)
                     .addComponent(btMaterial))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btAgente3)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -117,6 +133,12 @@ public class Principal extends javax.swing.JFrame {
         frmMat.setVisible(true);
     }//GEN-LAST:event_btMaterialActionPerformed
 
+    private void btAgente3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgente3ActionPerformed
+        frmIte= new frmItens();
+        frmIte.setLocationRelativeTo(null);
+        frmIte.setVisible(true);
+    }//GEN-LAST:event_btAgente3ActionPerformed
+
     
     public static void main(String args[]) {
       
@@ -133,6 +155,9 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAgente;
+    private javax.swing.JButton btAgente1;
+    private javax.swing.JButton btAgente2;
+    private javax.swing.JButton btAgente3;
     private javax.swing.JButton btColeta;
     private javax.swing.JButton btMaterial;
     private javax.swing.JButton btPosto;

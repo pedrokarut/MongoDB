@@ -20,7 +20,7 @@ import org.bson.types.ObjectId;
 public class frmAgenteAmbiental extends javax.swing.JFrame {
 
     AgenteAmbiental a;
-    public ObjectId codAgente;
+    public static ObjectId codAgente;
 
     
     public frmAgenteAmbiental() {
